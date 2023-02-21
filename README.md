@@ -4,15 +4,10 @@ flask-desktop is a Python module that allows you to convert Flask apps into cros
 
 ## Installation:
 
-::
-
-    pip install git+https://github.com/Widdershin/flask-desktop.git
-
-I'd like to have flask-desktop available on pip, but currently don't have the time and headspace to make that happen. If you want this to happen, please do it and I'll add you as a collaborator to this repo.
+    pip install git+https://github.com/jdabtieu/flask-desktop.git
 
 ## Usage:
 
-::
 
     from webui import WebUI # Add WebUI to your imports
     from flask import Flask, render_template, request
@@ -23,7 +18,7 @@ I'd like to have flask-desktop available on pip, but currently don't have the ti
     # all of your standard flask logic
 
     if __name__ == '__main__':
-      ui.run() #replace app.run() with ui.run(), and that's it
+      ui.run()
 
 flask-desktop is powered by PySide2, and should run on Windows, Mac and Linux. You can even create standalone executables using PyInstaller!
 

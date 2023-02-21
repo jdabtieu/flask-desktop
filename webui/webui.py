@@ -11,7 +11,7 @@ default_url = "127.0.0.1"
 
 
 class WebUI(object):
-    def __init__(self, app, url=default_url, port=5000,
+    def __init__(self, app, url=default_url, port=5000, width=None, height=None,
                  debug=False, using_win32=False, icon_path=None, app_name=None):
         self.flask_app = app
         self.flask_thread = Thread(target=self._run_flask,
@@ -26,6 +26,8 @@ class WebUI(object):
         self.view = web_widgets.QWebEngineView(self.app.activeModalWidget())
         self.page = CustomWebEnginePage(self.view)
         self.view.setPage(self.page)
+        self.width = width
+        self.height = height
 
     def run(self):
         self.run_flask()
@@ -47,12 +49,14 @@ class WebUI(object):
         #change_setting(settings.OfflineStorageDatabaseEnabled, True)
         #change_setting(settings.OfflineWebApplicationCacheEnabled, True)
 
-        self.view.showMaximized()
+        if self.width is None or self.height is None:
+            self.view.showMaximized()
+        else:
+            self.view.setFixedSize(self.width, self.height)
 
         self.app.exec_()
 
     def _run_flask(self, host, port, debug=False, using_win32=False):
-        print(host)
         if using_win32:
             import pythoncom
             pythoncom.CoInitialize()
